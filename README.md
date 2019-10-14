@@ -9,6 +9,9 @@ http://localhost:8888/swagger-ui.html#/
 Link para postman collection com exemplos:
 https://www.getpostman.com/collections/3f84562d4ba59ba5f8a5
 
+Link para H2 Console:
+http://localhost:8888/h2-console/login.jsp
+
 Respostas:
 Cenário 1 - Consultar Cliente
 Dado que o cliente deseja consultar o seu cadastro.
