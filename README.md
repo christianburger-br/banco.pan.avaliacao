@@ -1,5 +1,5 @@
 # banco.pan.avaliacao
-Iniciar na maquina local:  mvn spring-boot:run
+Iniciar:  mvn spring-boot:run
 Testar: mvn test
 
 Visao geral da API:
