@@ -1,11 +1,8 @@
 package com.example.avaliacao.controller;
 
 import com.example.avaliacao.domain.Account;
-import com.example.avaliacao.domain.Employee;
 import com.example.avaliacao.domain.Endereco;
 import com.example.avaliacao.domain.Pessoa;
-import com.example.avaliacao.repositories.EmployeeRepository;
-import com.example.avaliacao.service.EmployeeService;
 import com.example.avaliacao.service.ExternalService;
 import com.example.avaliacao.service.PessoaService;
 import lombok.RequiredArgsConstructor;
@@ -31,35 +28,9 @@ public class Controller {
 	private PessoaService pessoaService;
 
 	@Autowired
-	private EmployeeService employeeService;
-
-	@Autowired
 	private ExternalService externalService;
 
 	private Account account=null;
-
-	@PostMapping(path = "/employee/addEmployee" , produces = MediaType.APPLICATION_JSON_VALUE)
-	String addEmployee(@RequestBody Employee employee) throws Exception {
-		log.info(String.format(Locale.getDefault(), "Controller:addEmployee: id: %s", employee.getId()));
-		Employee employeeDB= employeeService.save(employee);
-		return String.valueOf(employeeDB.getId());
-	}
-
-	@GetMapping(path = "/employee/listAll")
-	String listEmployees() throws JSONException {
-		log.info(String.format(Locale.getDefault(), "Controller:listEmployees: %s", "<>"));
-		JSONObject response= new JSONObject();
-		List<Employee> result = employeeService.findAll();
-		if (result.isEmpty()) {
-			log.info(String.format(Locale.getDefault(), "Controller:listEmployees: %s", "EMPTY"));
-		}
-		for (Employee employee: result) {
-			log.info(String.format(Locale.getDefault(), "Controller:employee.getId(): %s", employee.getId()));
-			log.info(String.format(Locale.getDefault(), "Controller:employee.getName(): %s", employee.getName()));
-			response.put(employee.getId().toString(), employee.getName());
-		}
-		return response.toString();
-	}
 
 	@PostMapping(path = "/clientes/novoCliente" , produces = MediaType.APPLICATION_JSON_VALUE)
 	String criarCliente(@RequestBody Pessoa pessoaJSON) throws Exception {
@@ -80,7 +51,15 @@ public class Controller {
 			Pessoa pessoa= result.get();
 			log.info(String.format(Locale.getDefault(), "Controller:ListCliente: pessoa.getCpf(): %s", pessoa.getCpf()));
 			log.info(String.format(Locale.getDefault(), "Controller:ListCliente: pessoa.getNome(): %s", pessoa.getNome()));
-			response.put(pessoa.getCpf().toString(), pessoa.getNome());
+			response.put("nome", pessoa.getNome());
+			response.put("sobrenome", pessoa.getSobrenome());
+			response.put("cpf", pessoa.getCpf());
+			response.put("cep", pessoa.getEndereco().getCep());
+			response.put("bairro", pessoa.getEndereco().getBairro());
+			response.put("logradouro", pessoa.getEndereco().getLogradouro());
+			response.put("municipio", pessoa.getEndereco().getMunicipio());
+			response.put("estado", pessoa.getEndereco().getEstado());
+			response.put("pais", pessoa.getEndereco().getPais());
 		}
 		return response.toString();
 	}
@@ -133,6 +112,7 @@ public class Controller {
 		return externalService.consultaMunicipoPorEstados(estado);
 	}
 
+	/*
 	@GetMapping(path = "/contas/newAccount")
 	String newRandomAccount() {
 		this.account= Account.gerarNovaConta();
@@ -157,5 +137,6 @@ public class Controller {
 		result.put("resultado", false);
 		return result.toString();
 	}
+	*/
 
 }
