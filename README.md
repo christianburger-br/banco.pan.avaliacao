@@ -53,14 +53,14 @@ value: application/json
 
 payload(exemplo):
 {
-"nome" : "Christian",
-"sobrenome" : "Burger",
-"cpf" : "43508588068",
+"nome" : "Adriana",
+"sobrenome" : "Silva",
+"cpf" : "43508589968",
 "endereco" : {
-"cpf" : "43508588068",
-"cep": "91330-290",
-"logradouro":"Rua Matias Jose Bins, 514",
-"bairro":"Tres Figueiras",
+"cpf" : "43508589968",
+"cep": "91330-500",
+"logradouro":"Rua Moema, 625 Apt. 101",
+"bairro":"Chacara das Pedras",
 "municipio":"Porto Alegre",
 "estado":"RS",
 "pais":"Brazil"}
